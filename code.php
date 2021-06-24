@@ -58,6 +58,11 @@ if ( $x[0] == '/' ) {
 }
 $x_pieces = explode( '/', $x );
 
+foreach ($x_pieces as $index => $x_piece) {
+    $x_pieces[$index] = filter_var(urldecode($x_piece), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
+    $x_pieces[$index] = preg_replace("/[^A-Za-z0-9]/", '', $x_pieces[$index]);
+}
+
 // To easily manipulate colors between different formats
 include("color.class.php");
 
@@ -69,6 +74,7 @@ if ( isset( $x_pieces[1] ) ) {
 		$bg_color = $bg_color_parts[0];
 	}
 }
+$bg_color = preg_replace("/[^A-Fa-f0-9]/", 'f', $bg_color);
 $background = new color();
 $background->set_hex( $bg_color );
 
@@ -80,6 +86,7 @@ if ( isset( $x_pieces[2] ) ) {
 		$fg_color = $fg_color_parts[0];
 	}
 }
+$fg_color = preg_replace("/[^A-Fa-f0-9]/", 'f', $fg_color);
 $foreground = new color();
 $foreground->set_hex($fg_color);
 
@@ -170,6 +177,7 @@ if ( empty( $_GET['text'] ) || ! isset( $_GET['text'] ) ) {
 }
 
 if ( isset( $_GET['text'] ) && $_GET['text'] ) {
+    $_GET['text'] = filter_var($_GET['text'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 	$_GET['text'] = preg_replace_callback(
 		"/(0x[0-9A-F]{,3})/ui",
 		function( $matches ) {
