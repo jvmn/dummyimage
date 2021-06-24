@@ -1,4 +1,2 @@
-# Dummy Image PHP Script
-The source code behind [dummyimage.com](http://dummyimage.com) of [Hacker News fame](https://news.ycombinator.com/item?id=1077013).
-
-[http://www.russellheimlich.com/blog/tag/dummyimage.com](http://www.russellheimlich.com/blog/tag/dummyimage.com)
+# Image PHP Script
+This is a fork of the [dummyimage](https://github.com/kingkool68/dummyimage) repo as starting point for an image service for our projects with reduced and specific functionality.
