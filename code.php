@@ -60,7 +60,7 @@ $x_pieces = explode( '/', $x );
 
 foreach ($x_pieces as $index => $x_piece) {
     $x_pieces[$index] = filter_var(urldecode($x_piece), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
-    $x_pieces[$index] = preg_replace("/[^A-Za-z0-9]/", '', $x_pieces[$index]);
+    $x_pieces[$index] = preg_replace("/[^A-Za-z0-9:]/", '', $x_pieces[$index]);
 }
 
 // To easily manipulate colors between different formats
